@@ -37,5 +37,7 @@ public class TiposTransporte {
     public double obtenerPromedioTarifas(){
         return promedioTarifas;
     }
+
+   
     
 }
