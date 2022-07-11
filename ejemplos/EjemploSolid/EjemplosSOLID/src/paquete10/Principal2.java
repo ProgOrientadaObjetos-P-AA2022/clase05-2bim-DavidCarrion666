@@ -1,23 +1,22 @@
 /*
- * 
- * D - Dependency inversion principle (Principio de inversión de dependencias)
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package paquete10;
 
-public class Principal {
+/**
+ *
+ * @author SALA I
+ */
+public class Principal2 {
 
     public static void main(String[] args) {
-
         APINetflix api = new APINetflix();
         api.establecerApiKey("123455");
 
         GeneradorPeliculas gp = new GeneradorPeliculas();
         gp.establecerLlave(api);
         gp.establecerUrl("http://api.movie?api=");
-        System.out.println("API Netflix");
-        System.out.println(gp.obtenerUrl());
-
-        System.out.println("------------------------------------------------");
 
         APIAmazonMovie api2 = new APIAmazonMovie();
         api2.establecerApiKey("123455");
@@ -25,10 +24,6 @@ public class Principal {
         GeneradorPeliculas gp2 = new GeneradorPeliculas();
         gp2.establecerLlave(api2);
         gp2.establecerUrl("http://api.movie?api=");
-        System.out.println("API Amazon");
-        System.out.println(gp2.obtenerUrl());
-
-        System.out.println("------------------------------------------------");
 
         APIDirectvGo api3 = new APIDirectvGo();
         api3.establecerApiKey("123455");
@@ -36,10 +31,6 @@ public class Principal {
         GeneradorPeliculas gp3 = new GeneradorPeliculas();
         gp3.establecerLlave(api3);
         gp3.establecerUrl("http://api.movie?api=");
-        System.out.println("API Directv Go");
-        System.out.println(gp3.obtenerUrl());
-
-        System.out.println("------------------------------------------------");
 
         APIStarPlus api4 = new APIStarPlus();
         api4.establecerApiKey("123455");
@@ -47,8 +38,15 @@ public class Principal {
         GeneradorPeliculas gp4 = new GeneradorPeliculas();
         gp4.establecerLlave(api4);
         gp4.establecerUrl("http://api.movie?api=");
-        System.out.println("API Star Plus");
-        System.out.println(gp4.obtenerUrl());
+        
+        // --------------------------------------------------------------
+        
+        
+        EscrituraArchivo a1 = new EscrituraArchivo("peliculas.txt");
+        a1.establecerRegistroCasa(gp);
+        a1.establecerSalidaCasa();
+        
+        
 
     }
 }
