@@ -13,40 +13,43 @@ import java.util.ArrayList;
  *
  * @author SALA I
  */
-public class EscrituraArchivo {
+public class EscrituraArchivoSecuencial {
 
-    private String nombreArchivo;
+     private String nombreArchivo;
     private ObjectOutputStream salida;
     private GeneradorPeliculas registroPeliculas;
     private ArrayList<GeneradorPeliculas> listaPeliculas;
 
-    public EscrituraArchivo(String nombreArc) {
+    public EscrituraArchivoSecuencial(String nombreArc) {
         nombreArchivo = nombreArc;
-        establecerListaCasas();
-        try {
+        establecerListaPeliculas(); // obtener los valores (objetos)
+        // que tiene el archivo.
+        try // abre el archivo
+        {
             salida = new ObjectOutputStream(
                     new FileOutputStream(nombreArchivo));
-            if (obtenerListaCasas().size() > 0) {
-                for (int i = 0; i < obtenerListaCasas().size(); i++) {
-                    establecerRegistroCasa(obtenerListaCasas().get(i));
-                    establecerSalidaCasa();
+            if (obtenerListaPeliculas().size() > 0) {
+                for (int i = 0; i < obtenerListaPeliculas().size(); i++) {
+                    establecerRegistroPeliculas(obtenerListaPeliculas().get(i));
+                    establecerSalida();
                 }
+
             }
-        } catch (IOException ioException) {
+        } // fin de try
+        catch (IOException ioException) {
             System.err.println("Error al abrir el archivo.");
-        }
+        } // fin de catch
     }
 
     public void establecerNombreArchivo(String n) {
         nombreArchivo = n;
     }
 
-    public void establecerRegistroCasa(GeneradorPeliculas c) {
-        registroPeliculas = c;
+    public void establecerRegistroPeliculas(GeneradorPeliculas p) {
+        registroPeliculas = p;
     }
 
-    public void establecerSalidaCasa() {
-        
+    public void establecerSalida() {
         try {
             salida.writeObject(registroPeliculas);
         } catch (IOException ex) {
@@ -54,17 +57,20 @@ public class EscrituraArchivo {
         }
     }
 
-    public void establecerListaCasas() {
-        LecturaArchivo l = new LecturaArchivo(obtenerNombreArchivo());
-        l.establecerListaPeliculas();
-        listaPeliculas = l.obtenerListaPeliculas();
+    // en el atributo listaProfesores obtenemos los registros 
+    // del archivo
+    public void establecerListaPeliculas() {
+        LecturaArchivoSecuencial l
+                = new LecturaArchivoSecuencial(obtenerNombreArchivo());
+        l.establecerPeliculas();
+        listaPeliculas = l.obtenerPeliculas();
     }
 
     public String obtenerNombreArchivo() {
         return nombreArchivo;
     }
 
-    public ArrayList<GeneradorPeliculas> obtenerListaCasas() {
+    public ArrayList<GeneradorPeliculas> obtenerListaPeliculas() {
         return listaPeliculas;
     }
 
@@ -73,14 +79,16 @@ public class EscrituraArchivo {
     }
 
     public void cerrarArchivo() {
-        try {
+        try // cierra el archivo
+        {
             if (salida != null) {
                 salida.close();
             }
-        } catch (IOException ioException) {
+        } // fin de try
+        catch (IOException ioException) {
             System.err.println("Error al cerrar el archivo.");
 
-        }
+        } // fin de catch
     }
 
 }

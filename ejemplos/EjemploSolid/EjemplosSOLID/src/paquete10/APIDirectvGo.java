@@ -4,11 +4,13 @@
  */
 package paquete10;
 
+import java.io.Serializable;
+
 /**
  *
  * @author SALA I
  */
-public class APIDirectvGo implements APIMovie {
+public class APIDirectvGo implements APIMovie, Serializable {
 
     private String apiKey;
 

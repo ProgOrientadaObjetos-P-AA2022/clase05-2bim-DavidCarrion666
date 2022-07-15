@@ -38,15 +38,18 @@ public class Principal2 {
         GeneradorPeliculas gp4 = new GeneradorPeliculas();
         gp4.establecerLlave(api4);
         gp4.establecerUrl("http://api.movie?api=");
-        
+
         // --------------------------------------------------------------
-        
-        
-        EscrituraArchivo a1 = new EscrituraArchivo("peliculas.txt");
-        a1.establecerRegistroCasa(gp);
-        a1.establecerSalidaCasa();
-        
-        
+        String nombreArchivo = "Peliculas.data";
+        EscrituraArchivoSecuencial archivo = new EscrituraArchivoSecuencial(nombreArchivo);
+        archivo.establecerRegistroPeliculas(gp);
+        archivo.establecerSalida();
+        archivo.establecerRegistroPeliculas(gp2);
+        archivo.establecerSalida();
+        archivo.establecerRegistroPeliculas(gp3);
+        archivo.establecerSalida();
+        archivo.establecerRegistroPeliculas(gp4);
+        archivo.establecerSalida();
 
     }
 }
